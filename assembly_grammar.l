@@ -3,12 +3,21 @@ ALPHA 			[A-Za-z]
 ALPHANUMERIC 	[A-Za-z0-9]
 REGISTER 		R[0-7]
 WHITESPACE 		[\ \t]
+
+
 %%
-ADD|AND|NOT|LD|LDR|ST|STR|LEA|JSR|BR|JMP|RET 	{
-					printf("Found instruction %s\n", yytext);
-				}
-{REGISTER} 		printf("Found register %s\n", yytext);
-{WHITESPACE}+
+^{WHITESPACE}*ADD{WHITESPACE}+{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}		{
+				printf(" ADD RX, RY, RZ : %s\n", yytext);
+}
+^{WHITESPACE}*ADD{WHITESPACE}+{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}{WHITESPACE}*","{WHITESPACE}*{DIGIT}+		{
+				printf(" ADD RX, RY, NUMBER : %s\n", yytext);
+}
+^{WHITESPACE}*AND{WHITESPACE}+{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}		{
+				printf(" AND RX, RY, RZ : %s\n", yytext);
+}
+^{WHITESPACE}*AND{WHITESPACE}+{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}{WHITESPACE}*","{WHITESPACE}*{DIGIT}+		{
+				printf(" AND RX, RY, NUMBER : %s\n", yytext);
+}	
 .
 \n
 %%
