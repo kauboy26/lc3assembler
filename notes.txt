@@ -1,0 +1,11 @@
+if the labels have the same name as an instruction, then
+this thing might fail. Should I do something about it in the
+lex step (i.e. when regexes are being matched)?
+
+
+THE NEW LINE BUG!!!
+in the lex grammar file, you need to say:
+\n 				{ rule }
+and not
+'\n' 			{ rule }
+This bug took a while to find. 
