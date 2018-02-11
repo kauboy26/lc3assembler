@@ -17,7 +17,8 @@ WHITESPACE 		[\ \t]
 }
 ^{WHITESPACE}*AND{WHITESPACE}+{REGISTER}{WHITESPACE}*","{WHITESPACE}*{REGISTER}{WHITESPACE}*","{WHITESPACE}*{DIGIT}+		{
 				printf(" AND RX, RY, NUMBER : %s\n", yytext);
-}	
+}
+
 .
 \n
 %%
